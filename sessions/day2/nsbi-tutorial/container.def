@@ -1,0 +1,25 @@
+Bootstrap: docker
+From: pytorch/pytorch
+
+%post
+    # Update and install TeX packages
+    export DEBIAN_FRONTEND=noninteractive
+    export TZ="Europe/Berlin"
+    apt-get update
+    apt-get install -y texlive texlive-xetex texlive-luatex
+
+    # Upgrade pip and install Python packages
+    pip install --upgrade pip
+    pip install lightning[torch-extra] scikit-learn scikit-hep
+
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%labels
+    Author Tae Hyoun Park
+    Version v1.0
+    Description "PyTorch-based image with additional python packages and LaTeX"
+
+%help
+    This singularity image is based on the PyTorch docker container with additional python packages and LaTeX installation for ML-based HEP research & publications.

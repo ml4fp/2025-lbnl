@@ -5,5 +5,8 @@ images/.DS_Store
 */.ipynb_checkpoints/
 .vscode/
 
+**/*.egg-info/
+**/__pycache__/
+
 # exclude the build dir
 _build/
