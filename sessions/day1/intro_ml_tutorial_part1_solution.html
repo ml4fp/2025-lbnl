@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/day1/intro_ml_tutorial_part1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/day1/intro_ml_tutorial_part1_solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Binary classification on a HEP dataset" href="intro_ml_tutorial_part2.html" />
-    <link rel="prev" title="Intro to ML" href="day1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -189,9 +189,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pages/schedule.html">Schedule</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="day1.html">Intro to ML</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to PyTorch and binary classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_ml_tutorial_part1.html">Introduction to PyTorch and binary classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_ml_tutorial_part2.html">Binary classification on a HEP dataset</a></li>
 
 </ul>
@@ -281,7 +281,7 @@
       
       
       
-      <li><a href="../../_sources/sessions/day1/intro_ml_tutorial_part1.ipynb" target="_blank"
+      <li><a href="../../_sources/sessions/day1/intro_ml_tutorial_part1_solution.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -472,6 +472,14 @@ As an added tip, if you find code that uses one package but prefer another, LLMs
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example numpy array: [1 2 3 4 5]
+Example tensor: tensor([1, 2, 3, 4, 5])
+Example numpy array + 1: [2 3 4 5 6]
+Example tensor + 1: tensor([2, 3, 4, 5, 6])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -484,6 +492,20 @@ As an added tip, if you find code that uses one package but prefer another, LLMs
 <span class="c1"># The @ sign is a nice shorthand for matrix multiplication</span>
 <span class="n">m3</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">@</span> <span class="n">m2</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;m3: </span><span class="si">{</span><span class="n">m3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m1: [[-0.54210896  1.40720894  2.28211007 -1.09168608]
+ [-0.61397355 -0.3298897   0.76281983  0.80172121]
+ [-0.0381781   0.61641201 -0.92499216 -0.51854364]]
+m2: [[-0.3198036  -1.37226149 -0.25560568]
+ [-0.35356558 -0.81273828  0.56384053]
+ [ 0.44170652 -0.11929595  0.12256785]
+ [-0.94473174  2.06675951 -0.64900836]]
+m3: [[ 1.71520113 -2.9282764   1.92023429]
+ [-0.10748039  2.67660987 -0.45589664]
+ [-0.124423   -1.40994849  0.58048147]]
 </pre></div>
 </div>
 </div>
@@ -501,6 +523,16 @@ As an added tip, if you find code that uses one package but prefer another, LLMs
 <span class="c1"># Can also use the torch.matmul function</span>
 <span class="n">m4_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">m1_tensor</span><span class="p">,</span> <span class="n">m2_tensor</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;m4_tensor: </span><span class="si">{</span><span class="n">m4_tensor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m3_tensor: tensor([[ 1.7152, -2.9283,  1.9202],
+        [-0.1075,  2.6766, -0.4559],
+        [-0.1244, -1.4099,  0.5805]], dtype=torch.float64)
+m4_tensor: tensor([[ 1.7152, -2.9283,  1.9202],
+        [-0.1075,  2.6766, -0.4559],
+        [-0.1244, -1.4099,  0.5805]], dtype=torch.float64)
 </pre></div>
 </div>
 </div>
@@ -528,11 +560,62 @@ As an added tip, if you find code that uses one package but prefer another, LLMs
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m6_tensor: tensor([[0.0000],
+        [0.1111],
+        [0.2222],
+        [0.3333],
+        [0.4444],
+        [0.5556],
+        [0.6667],
+        [0.7778],
+        [0.8889],
+        [1.0000]])
+m6_tensor.shape: torch.Size([10, 1])
+
+m7_tensor: tensor([[0.0000, 0.1111, 0.2222, 0.3333, 0.4444],
+        [0.5556, 0.6667, 0.7778, 0.8889, 1.0000]])
+m7_tensor.shape: torch.Size([2, 5])
+
+m8_tensor: tensor([[0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,
+         0.0000],
+        [0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111,
+         0.1111],
+        [0.2222, 0.2222, 0.2222, 0.2222, 0.2222, 0.2222, 0.2222, 0.2222, 0.2222,
+         0.2222],
+        [0.3333, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333,
+         0.3333],
+        [0.4444, 0.4444, 0.4444, 0.4444, 0.4444, 0.4444, 0.4444, 0.4444, 0.4444,
+         0.4444],
+        [0.5556, 0.5556, 0.5556, 0.5556, 0.5556, 0.5556, 0.5556, 0.5556, 0.5556,
+         0.5556],
+        [0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667, 0.6667,
+         0.6667],
+        [0.7778, 0.7778, 0.7778, 0.7778, 0.7778, 0.7778, 0.7778, 0.7778, 0.7778,
+         0.7778],
+        [0.8889, 0.8889, 0.8889, 0.8889, 0.8889, 0.8889, 0.8889, 0.8889, 0.8889,
+         0.8889],
+        [1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,
+         1.0000]])
+m8_tensor.shape: torch.Size([10, 10])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The &quot;cat&quot; method concatenates tensors along a given dimension</span>
-<span class="c1">## YOUR CODE HERE: concatenate m5_tensor with itself along the first dimension</span>
+<span class="n">m9_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">m5_tensor</span><span class="p">,</span> <span class="n">m5_tensor</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;m9_tensor: </span><span class="si">{</span><span class="n">m9_tensor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;m9_tensor.shape: </span><span class="si">{</span><span class="n">m9_tensor</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m9_tensor: tensor([0.0000, 0.1111, 0.2222, 0.3333, 0.4444, 0.5556, 0.6667, 0.7778, 0.8889,
+        1.0000, 0.0000, 0.1111, 0.2222, 0.3333, 0.4444, 0.5556, 0.6667, 0.7778,
+        0.8889, 1.0000])
+m9_tensor.shape: torch.Size([20])
 </pre></div>
 </div>
 </div>
@@ -569,6 +652,14 @@ Let’s use as an example a simple 1D function:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y: tensor([53.], grad_fn=&lt;AddBackward0&gt;)
+dy/dA (x**2): tensor([25.])
+dy/db (1): tensor([1.])
+dy/dx (2*A*x): tensor([20.])
+</pre></div>
+</div>
+</div>
 </div>
 <p>Just like calculus class! Underneath the hood, pytorch is constructing a computational graph that represents the function you are trying to compute. In what’s called the “forward pass”, PyTorch computes your function and keeps track of the derivative of each operation with respect to it’s inputs. Then when you call <code class="docutils literal notranslate"><span class="pre">y.backward()</span></code>, PyTorch uses the chain rule to evaluate the gradient of each part of the graph that has <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> with respect to the scalar value. Let’s try to break this by giving PyTorch a function we know is non-differentiable, like <span class="math notranslate nohighlight">\(y = A|x|\)</span>.</p>
 <div class="cell docutils container">
@@ -588,6 +679,13 @@ Let’s use as an example a simple 1D function:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y: tensor([10.], grad_fn=&lt;MulBackward0&gt;)
+dy/dA (x): tensor([5.])
+dy/dx (A): tensor([2.])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -599,10 +697,17 @@ Let’s use as an example a simple 1D function:</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y: </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1">## YOUR CODE HERE: calculate the gradients of y with respect to A and x</span>
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dy/dA (x): </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dy/dx (A): </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y: tensor([0.], grad_fn=&lt;MulBackward0&gt;)
+dy/dA (x): tensor([0.])
+dy/dx (A): tensor([0.])
 </pre></div>
 </div>
 </div>
@@ -640,13 +745,16 @@ We’ll do this using the <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5e943b041b250ce8be9ec88c16baa8418b255dc5f64dc19e4443ac54199cca47.png" src="../../_images/5e943b041b250ce8be9ec88c16baa8418b255dc5f64dc19e4443ac54199cca47.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We know what points are samples from which distribution, but in real world examples we don&#39;t, so let&#39;s pretend and put the data together in a single array.</span>
 <span class="c1"># This data will be used as input to machine learning models in what follows.</span>
 
-<span class="c1">## YOUR CODE HERE: create a tensor of shape (N_bkg + N_sig, 2) that contains the background and signal samples together</span>
+<span class="n">input_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">input_bkg</span><span class="p">,</span> <span class="n">input_sig</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Plot input_x</span>
 
@@ -659,6 +767,9 @@ We’ll do this using the <code class="docutils literal notranslate"><span class
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/defece140bf0c898d960258ce6c47eddad9f594bfabf85396e80f56e5c9674aa.png" src="../../_images/defece140bf0c898d960258ce6c47eddad9f594bfabf85396e80f56e5c9674aa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -683,6 +794,9 @@ We’ll do this using the <code class="docutils literal notranslate"><span class
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a4a2bb7ddb44788fbaad5857690cb6b4e1adbe8321fc4a5248063e8c3a8c69c9.png" src="../../_images/a4a2bb7ddb44788fbaad5857690cb6b4e1adbe8321fc4a5248063e8c3a8c69c9.png" />
 </div>
 </div>
 <p>Now we have some data.
@@ -713,6 +827,11 @@ Let’s define <span class="math notranslate nohighlight">\(y = \sigma(Ax + b)\)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>out: tensor([0.5098], grad_fn=&lt;MulBackward0&gt;)
+</pre></div>
+</div>
+</div>
 </div>
 <p>The next thing we need is a loss function.
 We’ll use the binary cross entropy loss, which is standard in binary classification tasks:</p>
@@ -739,6 +858,13 @@ L[f] = \frac{1}{N} \sum_{i}^N y_i \log(f(x_i)) + (1 - y_i) \log(1 - f(x_i))
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label: tensor([0.])
+prediction: tensor([0.5098], grad_fn=&lt;MulBackward0&gt;)
+loss: 0.7128424048423767
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -747,6 +873,13 @@ L[f] = \frac{1}{N} \sum_{i}^N y_i \log(f(x_i)) + (1 - y_i) \log(1 - f(x_i))
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dL/dA: </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dL/db: </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dL/dA: tensor([[-0.4176],
+        [-0.0083]])
+dL/db: tensor([0.5098])
 </pre></div>
 </div>
 </div>
@@ -792,6 +925,15 @@ We will implement very simple gradient descent, with no batching.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ran for 5000 iterations
+Final loss: 0.2959858477115631
+Final A: [[0.8085767]
+ [3.1112075]]
+Final b: [-4.611681]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -801,6 +943,9 @@ We will implement very simple gradient descent, with no batching.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d9e6b54a539533dc22af6563f7b13aba0dd8be183cb8ffb936354e3884c1dee8.png" src="../../_images/d9e6b54a539533dc22af6563f7b13aba0dd8be183cb8ffb936354e3884c1dee8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -826,6 +971,9 @@ We will implement very simple gradient descent, with no batching.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0e6af51cf1a71ae7206b47934a50e430922f69e34c1ef48ca35f389ad38065fa.png" src="../../_images/0e6af51cf1a71ae7206b47934a50e430922f69e34c1ef48ca35f389ad38065fa.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -846,6 +994,12 @@ We will implement very simple gradient descent, with no batching.</p>
 <span class="n">auc</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_linear</span><span class="p">,</span> <span class="n">tpr_linear</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e604ac7f27166657237c2da99c26db84282c602eb4c02bc03ab9194d0ab6adbc.png" src="../../_images/e604ac7f27166657237c2da99c26db84282c602eb4c02bc03ab9194d0ab6adbc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC: 0.9304933333333333
 </pre></div>
 </div>
 </div>
@@ -900,11 +1054,48 @@ Whenever you start to write a neural network from scratch in PyTorch, the first 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+Layer (type:depth-idx)                   Param #
+=================================================================
+BinaryClassifierNN                       --
+├─Sequential: 1-1                        --
+│    └─Linear: 2-1                       150
+│    └─ReLU: 2-2                         --
+│    └─Linear: 2-3                       2,550
+│    └─ReLU: 2-4                         --
+│    └─Linear: 2-5                       51
+│    └─Sigmoid: 2-6                      --
+=================================================================
+Total params: 2,751
+Trainable params: 2,751
+Non-trainable params: 0
+=================================================================
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check that we can run a forward pass with our model</span>
-<span class="c1">## YOUR CODE HERE: run a forward pass through the model, just to check that we can get outputs</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_x</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.4829],
+        [0.5366],
+        [0.5158],
+        [0.5039],
+        [0.5315],
+        [0.5043],
+        [0.4921],
+        [0.5149],
+        [0.5047],
+        [0.4898]], grad_fn=&lt;SigmoidBackward0&gt;)
+torch.Size([10, 1])
 </pre></div>
 </div>
 </div>
@@ -938,19 +1129,25 @@ We just rely on the optimizer instead of adjusting the parameters of the model m
     <span class="c1"># Zero the gradients from the previous batch. Don&#39;t forget this!</span>
     <span class="n">optim</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
 
-    <span class="c1">## YOUR CODE HERE: implement the forward and backward pass needed to train the model</span>
+    <span class="c1"># Forward pass</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
 
-    <span class="c1"># 1. Forward pass</span>
+    <span class="c1"># Compute the loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">input_y</span><span class="p">)</span>
 
-    <span class="c1"># 2. Compute the loss</span>
-
-    <span class="c1"># 3. Backward pass</span>
+    <span class="c1"># Backward pass</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 
     <span class="c1"># Update the model parameters</span>
     <span class="n">optim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
         
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 1000/1000 [00:01&lt;00:00, 674.04it/s]
 </pre></div>
 </div>
 </div>
@@ -963,6 +1160,9 @@ We just rely on the optimizer instead of adjusting the parameters of the model m
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/36cc6bcc23e7a68c83b9f17d8ad6f89804a0f4ba0f18803ebd131a7819cf0f4a.png" src="../../_images/36cc6bcc23e7a68c83b9f17d8ad6f89804a0f4ba0f18803ebd131a7819cf0f4a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -988,13 +1188,15 @@ We just rely on the optimizer instead of adjusting the parameters of the model m
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b9eaecbc57a95eacf968c529100d7bb2a9e323d82a6c1b654b2fbe1543db4a5f.png" src="../../_images/b9eaecbc57a95eacf968c529100d7bb2a9e323d82a6c1b654b2fbe1543db4a5f.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can also calculate a ROC curve and the area under to get a performance metric</span>
 <span class="c1"># Get the model output for the entire data set</span>
-<span class="c1">## YOUR CODE HERE: get the model output for the entire data set</span>
-<span class="c1">## y_pred_nn = ...</span>
+<span class="n">y_pred_nn</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 
 <span class="c1"># Get the ROC curve</span>
 <span class="n">fpr_nn</span><span class="p">,</span> <span class="n">tpr_nn</span><span class="p">,</span> <span class="n">thresholds_nn</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">input_y</span><span class="p">,</span> <span class="n">y_pred_nn</span><span class="p">)</span>
@@ -1009,6 +1211,12 @@ We just rely on the optimizer instead of adjusting the parameters of the model m
 <span class="n">auc_nn</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_nn</span><span class="p">,</span> <span class="n">tpr_nn</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC: </span><span class="si">{</span><span class="n">auc_nn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/74140c38b02a0bbf413a86e14bfcf91201c82c709f20baf8042a7fd0ce5e7e32.png" src="../../_images/74140c38b02a0bbf413a86e14bfcf91201c82c709f20baf8042a7fd0ce5e7e32.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC: 0.9642366666666666
 </pre></div>
 </div>
 </div>
@@ -1060,6 +1268,13 @@ We can use the <code class="docutils literal notranslate"><span class="pre">torc
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC model: 0.9642366666666666
+AUC analytic: 0.96563
+</pre></div>
+</div>
+<img alt="../../_images/e68e90c3c2e8f22c23d09a3c3f990cb2916e463a87e517b77273048c378df405.png" src="../../_images/e68e90c3c2e8f22c23d09a3c3f990cb2916e463a87e517b77273048c378df405.png" />
+</div>
 </div>
 <p>The NN is likely getting a slightly higher AUC than the analytic solution. The problem is that the NN is only getting a better AUC on the dataset we explicitly trained it on. What if we sample a larger data set and try again?</p>
 <div class="cell docutils container">
@@ -1096,6 +1311,13 @@ We can use the <code class="docutils literal notranslate"><span class="pre">torc
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC model: 0.9585
+AUC analytic: 0.9610
+</pre></div>
+</div>
+<img alt="../../_images/52742be40c85b8512576988a16095554206dbc05c714415530c7f90b9edbf0e8.png" src="../../_images/52742be40c85b8512576988a16095554206dbc05c714415530c7f90b9edbf0e8.png" />
+</div>
 </div>
 <p>Now you should see the the model’s AUC is a bit lower than the analytic solution.
 We’re starting to see “over-training”, where the model starts to memorize your dataset, and we’ll cover how to deal with it in the next lecture.
@@ -1123,6 +1345,9 @@ Let’s plot it:</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d19353dc10a1983c1d1145f11cb93723d77b864cc660219eef928a9b799b481c.png" src="../../_images/d19353dc10a1983c1d1145f11cb93723d77b864cc660219eef928a9b799b481c.png" />
 </div>
 </div>
 <p>This is not very similar to what the NN learned!
@@ -1163,24 +1388,6 @@ In most cases we can ignore this detail and everything will be fine, but it is g
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="day1.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Intro to ML</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="intro_ml_tutorial_part2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Binary classification on a HEP dataset</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

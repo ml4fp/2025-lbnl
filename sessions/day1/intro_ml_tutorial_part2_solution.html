@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/day1/intro_ml_tutorial_part2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/day1/intro_ml_tutorial_part2_solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Day 2: ML Overviews, Differentiable Programing and NSBI" href="../day2/day2.html" />
-    <link rel="prev" title="Introduction to PyTorch and binary classification" href="intro_ml_tutorial_part1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -189,10 +189,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../pages/schedule.html">Schedule</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 1</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="day1.html">Intro to ML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_ml_tutorial_part1.html">Introduction to PyTorch and binary classification</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Binary classification on a HEP dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_ml_tutorial_part2.html">Binary classification on a HEP dataset</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Day 2</span></p>
@@ -281,7 +281,7 @@
       
       
       
-      <li><a href="../../_sources/sessions/day1/intro_ml_tutorial_part2.ipynb" target="_blank"
+      <li><a href="../../_sources/sessions/day1/intro_ml_tutorial_part2_solution.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -452,6 +452,12 @@ Entire working groups within experimental collaborations are dedicated to just t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is CUDA available? True
+Number of GPUs available: 4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -461,6 +467,12 @@ Entire working groups within experimental collaborations are dedicated to just t
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">device_name</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="n">dnumber</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device name: </span><span class="si">{</span><span class="n">device_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using device: cuda:0
+Device name: NVIDIA A100-SXM4-40GB
 </pre></div>
 </div>
 </div>
@@ -496,11 +508,61 @@ Learn to use it!</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;tree_event;1&#39;: &#39;TTree&#39;}
+name                 | typename                 | interpretation                
+---------------------+--------------------------+-------------------------------
+index                | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+eventNumber          | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+label                | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+met_et               | double                   | AsDtype(&#39;&gt;f8&#39;)
+met_phi              | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_n                | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+lep_pt_0             | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_pt_1             | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_eta_0            | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_eta_1            | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_phi_0            | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_phi_1            | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_E_0              | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_E_1              | double                   | AsDtype(&#39;&gt;f8&#39;)
+lep_charge_0         | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+lep_charge_1         | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+lep_type_0           | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+lep_type_1           | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+jet_n                | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+jet_pt_0             | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_pt_1             | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_eta_0            | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_eta_1            | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_phi_0            | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_phi_1            | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_E_0              | double                   | AsDtype(&#39;&gt;f8&#39;)
+jet_E_1              | double                   | AsDtype(&#39;&gt;f8&#39;)
+mcWeight             | double                   | AsDtype(&#39;&gt;f8&#39;)
+runNumber            | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+channelNumber        | int64_t                  | AsDtype(&#39;&gt;i8&#39;)
+============================================
+File loaded with  600000  events 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dump list of feature</span>
 <span class="n">dfall</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;index&#39;, &#39;eventNumber&#39;, &#39;label&#39;, &#39;met_et&#39;, &#39;met_phi&#39;, &#39;lep_n&#39;,
+       &#39;lep_pt_0&#39;, &#39;lep_pt_1&#39;, &#39;lep_eta_0&#39;, &#39;lep_eta_1&#39;, &#39;lep_phi_0&#39;,
+       &#39;lep_phi_1&#39;, &#39;lep_E_0&#39;, &#39;lep_E_1&#39;, &#39;lep_charge_0&#39;, &#39;lep_charge_1&#39;,
+       &#39;lep_type_0&#39;, &#39;lep_type_1&#39;, &#39;jet_n&#39;, &#39;jet_pt_0&#39;, &#39;jet_pt_1&#39;,
+       &#39;jet_eta_0&#39;, &#39;jet_eta_1&#39;, &#39;jet_phi_0&#39;, &#39;jet_phi_1&#39;, &#39;jet_E_0&#39;,
+       &#39;jet_E_1&#39;, &#39;mcWeight&#39;, &#39;runNumber&#39;, &#39;channelNumber&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -512,6 +574,173 @@ Learn to use it!</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>eventNumber</th>
+      <th>label</th>
+      <th>met_et</th>
+      <th>met_phi</th>
+      <th>lep_n</th>
+      <th>lep_pt_0</th>
+      <th>lep_pt_1</th>
+      <th>lep_eta_0</th>
+      <th>lep_eta_1</th>
+      <th>...</th>
+      <th>jet_pt_1</th>
+      <th>jet_eta_0</th>
+      <th>jet_eta_1</th>
+      <th>jet_phi_0</th>
+      <th>jet_phi_1</th>
+      <th>jet_E_0</th>
+      <th>jet_E_1</th>
+      <th>mcWeight</th>
+      <th>runNumber</th>
+      <th>channelNumber</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>249632</td>
+      <td>1</td>
+      <td>25.118</td>
+      <td>1.14010</td>
+      <td>2</td>
+      <td>46.439</td>
+      <td>44.589</td>
+      <td>0.131030</td>
+      <td>0.40654</td>
+      <td>...</td>
+      <td>-7.000</td>
+      <td>2.4346</td>
+      <td>-7.00000</td>
+      <td>-0.76667</td>
+      <td>-7.00000</td>
+      <td>308720.0</td>
+      <td>-7.0</td>
+      <td>0.000002</td>
+      <td>284500</td>
+      <td>345323</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>892975</td>
+      <td>1</td>
+      <td>27.974</td>
+      <td>0.84442</td>
+      <td>2</td>
+      <td>86.819</td>
+      <td>55.438</td>
+      <td>-0.017265</td>
+      <td>-0.16338</td>
+      <td>...</td>
+      <td>-7.000</td>
+      <td>-1.2789</td>
+      <td>-7.00000</td>
+      <td>1.66290</td>
+      <td>-7.00000</td>
+      <td>245670.0</td>
+      <td>-7.0</td>
+      <td>0.000002</td>
+      <td>284500</td>
+      <td>345323</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>730573</td>
+      <td>0</td>
+      <td>123.290</td>
+      <td>-2.94810</td>
+      <td>2</td>
+      <td>105.810</td>
+      <td>40.506</td>
+      <td>-1.338900</td>
+      <td>-1.03500</td>
+      <td>...</td>
+      <td>-7.000</td>
+      <td>-7.0000</td>
+      <td>-7.00000</td>
+      <td>-7.00000</td>
+      <td>-7.00000</td>
+      <td>-7.0</td>
+      <td>-7.0</td>
+      <td>0.002468</td>
+      <td>284500</td>
+      <td>363492</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>717584</td>
+      <td>0</td>
+      <td>78.558</td>
+      <td>1.04450</td>
+      <td>2</td>
+      <td>56.666</td>
+      <td>35.124</td>
+      <td>2.294600</td>
+      <td>1.88700</td>
+      <td>...</td>
+      <td>53.942</td>
+      <td>1.6270</td>
+      <td>0.55314</td>
+      <td>-1.84880</td>
+      <td>-0.47055</td>
+      <td>211610.0</td>
+      <td>63629.0</td>
+      <td>0.000197</td>
+      <td>284500</td>
+      <td>363492</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>319020</td>
+      <td>0</td>
+      <td>15.863</td>
+      <td>0.74840</td>
+      <td>2</td>
+      <td>94.708</td>
+      <td>72.811</td>
+      <td>0.812740</td>
+      <td>0.77954</td>
+      <td>...</td>
+      <td>-7.000</td>
+      <td>-0.6358</td>
+      <td>-7.00000</td>
+      <td>-1.91230</td>
+      <td>-7.00000</td>
+      <td>173810.0</td>
+      <td>-7.0</td>
+      <td>0.000197</td>
+      <td>284500</td>
+      <td>363492</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div></div>
 </div>
 <p>We have 800k events in this data file, which sits in a nice medium range where we have plenty of data for training but not so much data that we will run into memory constraints.
 What to do in cases when this is not true is beyond the scope for today, but keep in mind it didn’t need to be this way, and often won’t be in real world applications.</p>
@@ -525,6 +754,12 @@ There are both signal and background events where this will not be the case, e.g
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of events before selections:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfall</span><span class="p">))</span>
 <span class="n">fulldata</span> <span class="o">=</span> <span class="n">dfall</span><span class="p">[</span><span class="n">dfall</span><span class="o">.</span><span class="n">lep_n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of events after selections:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fulldata</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of events before selections: 600000
+Number of events after selections: 596571
 </pre></div>
 </div>
 </div>
@@ -557,6 +792,19 @@ As you’ll see, what we’ll have to do to handle these weights is actually qui
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of selected signal events: 397728
+Number of selected background events: 198843
+</pre></div>
+</div>
+<img alt="../../_images/d661b83d67365cdd2fe1f240d9ec71c76cd09b36724ed17345909062dbbd302d.png" src="../../_images/d661b83d67365cdd2fe1f240d9ec71c76cd09b36724ed17345909062dbbd302d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean weight: 0.00021820649947751399
+Std weight: 0.0007363346766555201
+Max weight: 0.05242
+Min weight: -0.045557
+</pre></div>
+</div>
+</div>
 </div>
 <p>For the collider physicists: a few things to note about this weight distribution. First, the mean weight is very small, only about 0.0002. This reduces the effective number of events in our data sample, but as we’ll see it doesn’t actually matter for training the network. Second, some of these weights are negative. This may seem like a problem, and many data science tools will break if asked to work with some negative event weights, but in reality we can train networks with a small fraction of negative weights with no issue, as we’ll do so here!</p>
 <p>Next we need to decide which features we’ll use to disciminate the signal from background. Tho start we’ll just use 6 features, but one of the great things about machine learning based classifiers, like neural networks or BDTs, is they can easily accommodate and will benefit from more features, assuming those features are pre-processed properly. These extra features can be either orthogonal features that tell the network something new about the events, or “engineered” features which we know, perhaps from thinking about the underlying physics, are useful.</p>
@@ -576,6 +824,82 @@ As you’ll see, what we’ll have to do to handle these weights is actually qui
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>met_et</th>
+      <th>met_phi</th>
+      <th>lep_pt_0</th>
+      <th>lep_pt_1</th>
+      <th>lep_eta_0</th>
+      <th>lep_eta_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25.118</td>
+      <td>1.14010</td>
+      <td>46.439</td>
+      <td>44.589</td>
+      <td>0.131030</td>
+      <td>0.40654</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27.974</td>
+      <td>0.84442</td>
+      <td>86.819</td>
+      <td>55.438</td>
+      <td>-0.017265</td>
+      <td>-0.16338</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>123.290</td>
+      <td>-2.94810</td>
+      <td>105.810</td>
+      <td>40.506</td>
+      <td>-1.338900</td>
+      <td>-1.03500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>78.558</td>
+      <td>1.04450</td>
+      <td>56.666</td>
+      <td>35.124</td>
+      <td>2.294600</td>
+      <td>1.88700</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15.863</td>
+      <td>0.74840</td>
+      <td>94.708</td>
+      <td>72.811</td>
+      <td>0.812740</td>
+      <td>0.77954</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>What are these features?</p>
 <ul class="simple">
@@ -608,6 +932,12 @@ If you’re tring to maximize performance, the best advice is to use everything!
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/3fdf6523c3e05cb728e672ed4dda74cb7175d6cb6aed6bf5dc4820a5150dc9df.png" src="../../_images/3fdf6523c3e05cb728e672ed4dda74cb7175d6cb6aed6bf5dc4820a5150dc9df.png" />
+</div>
 </div>
 </section>
 <section id="data-preprocessing">
@@ -636,6 +966,15 @@ All we need to do for now is calculate the mean and std. deviation of our input 
 <span class="nb">print</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stds:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Means:
+[ 6.02780576e+01 -8.23192340e-03  6.01928220e+01  2.81181012e+01
+  4.10741639e-04 -6.73525301e-04]
+Stds:
+[46.61779439  1.81266806 40.94265249 20.34724452  1.21066976  1.23602892]
 </pre></div>
 </div>
 </div>
@@ -677,18 +1016,43 @@ The following equations make this happen:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum of signal weights before normalization: 6.166582097600001
+Sum of background weights before normalization: 124.0090875022 
+
+Sum of signal weights after normalization: 298285.5
+Sum of background weights after normalization: 298285.5 
+
+Class ratio: 1.0
+Mean event weight: 0.9999999999999998
+</pre></div>
+</div>
+</div>
 </div>
 <p>At this point we’ve normalized our weights, have the data and labels ready, and have a pre-processing plan that we’ll implement into the network itself.
 This is a good point at which to turn everything into PyTorch tensors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## YOUR CODE HERE: convert all of the numpy arrays to tensors (with the correct dtype)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">means</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">stds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">stds</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data shape:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Target shape:&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weights shape:&quot;</span><span class="p">,</span> <span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Means shape:&quot;</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stds shape:&quot;</span><span class="p">,</span> <span class="n">stds</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape: torch.Size([596571, 6])
+Target shape: torch.Size([596571])
+Weights shape: torch.Size([596571])
+Means shape: torch.Size([6])
+Stds shape: torch.Size([6])
 </pre></div>
 </div>
 </div>
@@ -703,6 +1067,12 @@ We can add a “singleton” dimension using the unsqueeze function</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target shape: </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Weights shape: </span><span class="si">{</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Target shape: torch.Size([596571, 1])
+Weights shape: torch.Size([596571, 1])
 </pre></div>
 </div>
 </div>
@@ -735,6 +1105,14 @@ You can see what device a tensor is currently stored on using the “device” m
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m1 device: cpu
+m2 device: cpu
+m1 device: cuda:0
+m2 device: cuda:0
+</pre></div>
+</div>
+</div>
 </div>
 <p>That was quick for a small tensor, but in general moving large tensors between devices is not a free operation.
 Unnecessarily repeating this operation is a common way to accidently bottleneck network training!
@@ -747,11 +1125,21 @@ Ideally you should minimize these operations in your code (or use someone else�
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.62 μs ± 13.3 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now the pytorch version</span>
 <span class="o">%</span><span class="k">timeit</span> m1_tensor_gpu @ m2_tensor_gpu
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.71 μs ± 264 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -766,6 +1154,11 @@ Ideally you should minimize these operations in your code (or use someone else�
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.61 ms ± 369 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -773,6 +1166,11 @@ Ideally you should minimize these operations in your code (or use someone else�
 <span class="n">m2_large_gpu</span> <span class="o">=</span> <span class="n">m2_large</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="o">%</span><span class="k">timeit</span> m1_large_gpu @ m2_large_gpu
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>235 μs ± 4.12 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -791,11 +1189,20 @@ We won’t cover the solutions to this issue today, but there are some links bel
 For now, just don’t take the fact that we can call these operations with no issues for granted!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## YOUR CODE HERE: move the data, target, and weight tensors to the GPU</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target shape: </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Weights shape: </span><span class="si">{</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape: torch.Size([596571, 6])
+Target shape: torch.Size([596571, 1])
+Weights shape: torch.Size([596571, 1])
 </pre></div>
 </div>
 </div>
@@ -835,6 +1242,17 @@ For now, just don’t take the fact that we can call these operations with no is
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train Shape:  torch.Size([298285, 6])
+y_train Shape:  torch.Size([298285, 1])
+Training Weights shape:  torch.Size([298285, 1]) 
+
+X_val_and_test Shape:  torch.Size([298286, 6])
+y_val_and_test Shape:  torch.Size([298286, 1])
+weights_val_and_test shape:  torch.Size([298286, 1])
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="split-the-rest-val-test-into-validation-set-and-test-set">
@@ -859,6 +1277,21 @@ For now, just don’t take the fact that we can call these operations with no is
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_test Shape: &quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y_test Shape: &quot;</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;weights_test shape: &quot;</span><span class="p">,</span> <span class="n">weights_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train Shape:  torch.Size([298285, 6])
+y_train Shape:  torch.Size([298285, 1])
+weights_train shape:  torch.Size([298285, 1]) 
+
+X_val Shape:  torch.Size([149143, 6])
+y_val Shape:  torch.Size([149143, 1])
+weights_val shape:  torch.Size([149143, 1]) 
+
+X_test Shape:  torch.Size([149143, 6])
+y_test Shape:  torch.Size([149143, 1])
+weights_test shape:  torch.Size([149143, 1])
 </pre></div>
 </div>
 </div>
@@ -898,8 +1331,14 @@ We can do all of this in just a few lines of code.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stds</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">stds</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="c1">## YOUR CODE HERE: define a stack of linear layers with ReLU activations and input dimension input_dim</span>
-        <span class="c1"># self.linear_relu_stack = torch.nn.Sequential(...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -914,8 +1353,8 @@ We can do all of this in just a few lines of code.</p>
         <span class="c1"># Rescale the input features to have mean 0 and std 1</span>
         <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">stds</span>
 
-        <span class="c1">## YOUR CODE HERE: implement the forward pass through the linear stack and return the output</span>
-        <span class="c1"># return ...</span>
+        <span class="c1"># Forward pass through the network</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -925,6 +1364,26 @@ We can do all of this in just a few lines of code.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s initialize the network and print the architecture using the torchinfo library</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">HiggsNet</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">means</span><span class="o">=</span><span class="n">means</span><span class="p">,</span> <span class="n">stds</span><span class="o">=</span><span class="n">stds</span><span class="p">)</span>
 <span class="n">torchinfo</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+Layer (type:depth-idx)                   Param #
+=================================================================
+HiggsNet                                 12
+├─Sequential: 1-1                        --
+│    └─Linear: 2-1                       1,792
+│    └─ReLU: 2-2                         --
+│    └─Linear: 2-3                       65,792
+│    └─ReLU: 2-4                         --
+│    └─Linear: 2-5                       257
+│    └─Sigmoid: 2-6                      --
+=================================================================
+Total params: 67,853
+Trainable params: 67,841
+Non-trainable params: 12
+=================================================================
 </pre></div>
 </div>
 </div>
@@ -942,13 +1401,55 @@ Let’s see if we can execute a forward pass:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test input shape: torch.Size([10, 6])
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">test_input</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:]</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test input shape: </span><span class="si">{</span><span class="n">test_input</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">test_output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test output shape: </span><span class="si">{</span><span class="n">test_output</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test output: </span><span class="si">{</span><span class="n">test_output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nn">File /global/common/software/m3246/conda/lbl-school/lib/python3.12/site-packages/torch/nn/modules/module.py:1751,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1749</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1750</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1751</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /global/common/software/m3246/conda/lbl-school/lib/python3.12/site-packages/torch/nn/modules/module.py:1762,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1758</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1759</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1760</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1761</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1762</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1764</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1765</span> <span class="n">called_always_called_hooks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="nn">Cell In[23], line 41,</span> in <span class="ni">HiggsNet.forward</span><span class="nt">(self, x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="sd"> Forward pass through the network.</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="sd"> Args:</span>
+<span class="sd">   (...)     37     torch.Tensor: The output of the network, shape (batch_size, 1).</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="c1"># Rescale the input features to have mean 0 and std 1</span>
+<span class="ne">---&gt; </span><span class="mi">41</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">stds</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># Forward pass through the network</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="ne">RuntimeError</span>: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+</pre></div>
+</div>
+</div>
 </div>
 <p>This should return an error, because by default PyTorch initializes the model weights and biases on the CPU, while we have all of our data on the GPU.
-Go ahead and fix this.</p>
+The solution is a simple “.to” call.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## YOUR CODE HERE: move the model to the GPU</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model parameters on device: </span><span class="si">{</span><span class="nb">next</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1011,13 +1512,17 @@ We can shuffle the data using another utility function from sklearn</p>
         <span class="n">y_batch</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
         <span class="n">weights_batch</span> <span class="o">=</span> <span class="n">weights_train</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
 
-        <span class="c1">## YOUR CODE HERE: implement the forward / backward pass and optimizer step needed to train the model</span>
-        <span class="c1">## Remember to weight the loss function! There&#39;s a hint on how to do this below :)</span>
+        <span class="c1"># Forward pass</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
 
-        <span class="c1"># 1. Forward pass</span>
-        <span class="c1"># 2. Compute the loss</span>
-        <span class="c1"># 3. Backward pass</span>
-        <span class="c1"># Update the model parameters</span>
+        <span class="c1"># Weight the loss by the event weight, then take mean over the batch</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">weights_batch</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="c1"># Backward pass</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>  <span class="c1"># This important line clears the gradients from the previous batch</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
         <span class="c1"># Add the loss to the training loss list</span>
         <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
@@ -1037,8 +1542,7 @@ We can shuffle the data using another utility function from sklearn</p>
         <span class="n">val_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
 
     <span class="c1"># As a final step, shuffle the training data again to prepare for the next epoch</span>
-    <span class="c1">## YOUR CODE HERE: shuffle the training data, labels, and weights</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;You need to implement this!&quot;</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">weights_train</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">weights_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1061,9 +1565,9 @@ We can shuffle the data using another utility function from sklearn</p>
 <p>Evaluate the model based on predictions made with X_test <span class="math notranslate nohighlight">\(\rightarrow\)</span> y_test</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## YOUR CODE HERE: run predictions on the training and testing set</span>
-<span class="c1"># y_pred_test = ...</span>
-<span class="c1"># y_pred_train = ...</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run predictions on the training and testing set</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 
 <span class="c1"># Flatten off the singleton dimension on the predictions, labels, and weights</span>
 <span class="c1"># and convert to numpy arrays</span>
@@ -1162,9 +1666,7 @@ We can shuffle the data using another utility function from sklearn</p>
 </div>
 </div>
 </div>
-<p>The simplest way to use the classifier score to separate signal and background is to make a cut on the classifier score for all the events. In the following, we scan through the cut value and look at the corresponding significance. This can help us determine the optimal cut value of the classifier score.
-Note if we don’t cut at all, we obtain the inclusive significance.
-Any improvement in the significance above the inclusive value indicates that our classifier is useful!</p>
+<p>The simplest way to use the classifier score to separate signal and background is to make a cut on the classifier score for all the events. In the following, we scan through the cut value and look at the corresponding significance. This can help us determine the optimal cut value of the classifier score.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">int_pred_test_sig</span> <span class="o">=</span> <span class="p">[</span><span class="n">weights_test</span><span class="p">[(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y_pred_test</span> <span class="o">&gt;</span> <span class="n">th_cut</span><span class="p">)]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">for</span> <span class="n">th_cut</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)]</span>
@@ -1206,9 +1708,6 @@ Along the way, we’ll also use some data utility classes that ship with PyTorch
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Central to pytorch lightning is the &quot;LightningModule&quot; class which organizes steps in the training loop into reusable pieces</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.lib.polynomial</span><span class="w"> </span><span class="kn">import</span> <span class="n">_raise_power</span>
-
-
 <span class="k">class</span><span class="w"> </span><span class="nc">HiggsNetLightning</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">LightningModule</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">stds</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1227,15 +1726,16 @@ Along the way, we’ll also use some data utility classes that ship with PyTorch
         <span class="k">return</span> <span class="n">loss</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
-        <span class="c1">## YOUR CODE HERE: implement the validation step</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;You need to implement this!&quot;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">prog_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Display the loss in the progress bar</span>
         <span class="k">return</span> <span class="n">loss</span>
     
     <span class="k">def</span><span class="w"> </span><span class="nf">predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
-        <span class="c1">## YOUR CODE HERE: run predictions with the model</span>
-        <span class="c1"># y_hat = ...</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;You need to implement this!&quot;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">y_hat</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1408,24 +1908,6 @@ Packages are very helpful, use them as much as possible!</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro_ml_tutorial_part1.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to PyTorch and binary classification</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../day2/day2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Day 2: ML Overviews, Differentiable Programing and NSBI</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
